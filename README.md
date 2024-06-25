@@ -2,6 +2,12 @@
 
 This is an application designed to exploit a vulnerability in Phantom wallets to crack 12-word passphrases. The application utilizes Node.js and the Puppeteer library for automated interaction with Phantom wallet interfaces.
 
+## Video Demonstration
+
+
+https://github.com/SathruwanCooray/Phantom_Wallet_Passphrase_Cracking_Application/assets/150252729/0c6d6ce4-9608-4744-97f5-5adc4095af5d
+
+
 ## Overview
 
 The Phantom Wallet Passphrase Cracking Application aims to exploit a specific vulnerability in Phantom wallets. When provided with a 12-word passphrase, Phantom wallets check the validity of each word against a predefined set of accepted phrases. If any word in the passphrase is not in their system, the wallet marks the entire passphrase as invalid.
