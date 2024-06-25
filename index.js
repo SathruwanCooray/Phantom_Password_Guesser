@@ -2,9 +2,9 @@ const puppeteer = require('puppeteer');
 const fs = require('fs/promises');
 
 (async () => {
-  const extensionPath = 'C:\\Users\\sathruwan\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\bfnaelmomeimhlpmgjnjophhpkkoljpa\\24.3.0_0';
-  const inputSelector = '.sc-jObWnj.fdrVDH';
-  const errorSelector = '.sc-eGPXGI.fJDhZB';
+  const extensionPath = 'C:\\Users\\sathruwan\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\bfnaelmomeimhlpmgjnjophhpkkoljpa\\24.10.2_0';
+  const inputSelector = '.sc-ehCJOs.iyttYH';
+  const errorSelector = '.sc-fHeRUh.invxsP';
   const wordsFilePath = 'words_dictionary.json'; // Path to your JSON file
   const outputFilePath = 'valid_words.json';
   const processingFilePath = 'processing_word.txt'; // Text file to store currently processing word
@@ -23,11 +23,23 @@ const fs = require('fs/promises');
   try {
     const page = await browser.newPage();
     await page.goto('chrome-extension://bfnaelmomeimhlpmgjnjophhpkkoljpa/onboarding.html');
-    await page.waitForSelector('.sc-eCImPb.fajfuv');
-    console.log('Button found!');
+    // Wait for the first button and click it
+    await page.waitForSelector('.sc-eCImPb.dPiuzj'); 
+    console.log('First button found!');
+    await page.click('.sc-eCImPb.dPiuzj');
+    console.log('First button clicked successfully');
 
-    await page.click('.sc-eCImPb.fajfuv');
-    console.log('Button clicked successfully');
+    // Wait for the second div acting as button and click it
+    await page.waitForSelector('.sc-bilyIR.iAHaiv'); 
+    console.log('Second div acting as button found!');
+
+    // Ensure the element is in view before clicking
+    await page.evaluate(() => {
+      document.querySelector('.sc-bilyIR.iAHaiv').scrollIntoView();
+    });
+
+    await page.click('.sc-bilyIR.iAHaiv');
+    console.log('Second div acting as button clicked successfully');
 
     const wordsFile = await fs.readFile(wordsFilePath);
     const wordsData = JSON.parse(wordsFile);
